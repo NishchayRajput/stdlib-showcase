@@ -1,0 +1,15 @@
+{
+  "name": "stdlib-cli",
+  "version": "1.0.0",
+  "description": "Statistical and filesystem operations CLI",
+  "main": "bin/index.js",
+  "bin": {
+    "stats-cli": "./bin/index.js"
+  },
+  "dependencies": {
+    "@stdlib/stats": "^0.3.3",
+    "chalk": "^4.1.2",
+    "commander": "^9.4.0",
+    "fs-extra": "^10.1.0"
+  }
+}
