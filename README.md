@@ -32,76 +32,24 @@ Options:
 Examples:
 ```bash
 # Basic statistics
-stats-cli stats 1 2 3 4 5 --mean     # Calculate mean
-stats-cli stats 1 2 3 4 5 --median   # Calculate median
-stats-cli stats 1 2 2 3 4 --mode     # Find mode (most frequent value)
-stats-cli stats 1 2 3 4 5 --stdev    # Calculate standard deviation
+stats-cli stats [1, 2, 3,3 4, 5] --mean     # Calculate mean
+stats-cli stats [1, 2, 3,3 4, 5] --median   # Calculate median
+stats-cli stats [1, 2, 3,3 4, 5] --mode     # Find mode (most frequent value)
+stats-cli stats [1, 2, 3,3 4, 5] --stdev    # Calculate standard deviation
+stats-cli stats [1, 2, 3,3 4, 5] --stdev --dof=5    # defaul degree of freedom is 1
 
 # Multiple operations
-stats-cli stats 1 2 3 4 5 --mean --median
-stats-cli stats 1 2 3 4 5 --stdev --variance
+stats-cli stats [1, 2, 3,3 4, 5] --mean --median
+stats-cli stats [1, 2, 3,3 4, 5] --stdev --variance # defaul degree of freedom is 1
+stats-cli stats [1, 2, 3,3 4, 5] --stdev --variance --dof=2
 
 # Mode examples
-stats-cli stats 1 2 3 4 5    --mode  # No mode (no repeated values)
-stats-cli stats 1 2 2 3 3    --mode  # Multiple modes: 2, 3
-stats-cli stats 1 2 2 2 3    --mode  # Single mode: 2
+stats-cli stats [1, 2, 3,3 4, 5]    --mode  # No mode (no repeated values)
+stats-cli stats [1, 2, 2, 3, 3]    --mode  # Multiple modes: 2, 3
+stats-cli stats [1, 2, 2, 2, 3]    --mode  # Single mode: 2
 
 # All statistics at once
-stats-cli stats 1 2 3 4 5 --all
+stats-cli stats [1, 2, 3, 4, 5] --all
 ```
 
-## File System Operations
 
-Basic file system operations:
-
-- List directory contents:
-  ```bash
-  stats-cli ls [-l]
-  ```
-
-- Change directory:
-  ```bash
-  stats-cli cd [directory]
-  ```
-
-- Create directory:
-  ```bash
-  stats-cli mkdir <directory>
-  ```
-
-- Copy files/directories:
-  ```bash
-  stats-cli cp <source> <destination>
-  ```
-
-- Move/rename files/directories:
-  ```bash
-  stats-cli mv <source> <destination>
-  ```
-
-- Remove files/directories:
-  ```bash
-  stats-cli rm <path>
-  ```
-
-- Display file contents:
-  ```bash
-  stats-cli cat <file>
-  ```
-
-## Examples
-
-```bash
-# Statistical operations
-stats-cli stats 1 2 3 4 5 --mean --median
-stats-cli stats 1 2 2 3 4 5 5 --mode  # Will show 2 and 5 as modes
-stats-cli stats 1 2 3 4 5 --stdev --variance
-stats-cli stats 1 2 3 4 5 --skewness
-stats-cli stats 1 2 3 4 5 --kurtosis
-```
-
-# File operations
-stats-cli ls -l
-stats-cli mkdir test
-stats-cli cp source.txt dest.txt
-```
