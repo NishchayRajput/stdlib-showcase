@@ -5,6 +5,7 @@ const stats = require('../commands/stats');
 const fs = require('../commands/filesystem');
 
 program
+  .name('stdlib-cli') // Change CLI prefix to stdlib-cli
   .version('1.0.0')
   .description('A CLI for statistical operations and file management');
 
@@ -12,17 +13,30 @@ program
 program
   .command('stats')
   .description('Perform statistical operations on a series of numbers')
-  .argument('<numbers...>', 'Space-separated numbers')
+  .argument('[numbers...]', 'Array of numbers in JSON format (e.g., [1, 2, 3, 4, 5])') // Make numbers optional
   .option('-m, --mean', 'Calculate mean')
   .option('-d, --median', 'Calculate median')
   .option('-s, --stdev', 'Calculate standard deviation')
   .option('-v, --variance', 'Calculate variance')
   .option('-n, --min', 'Find minimum value')
   .option('-x, --max', 'Find maximum value')
-  .option('-w, --skewness', 'Calculate skewness')
-  .option('-k, --kurtosis', 'Calculate kurtosis')
   .option('-a, --all', 'Show all statistics')
-  .action(stats.handleStats);
+  .option('--dof <number>', 'Degree of freedom for standard deviation', parseFloat)
+  .action((numbers, options) => {
+    // Extract array from options if passed as an option
+    const arrayOption = options.array ? options.array : null;
+
+    // Use numbers argument if provided, otherwise use array option
+    const inputNumbers = numbers.length > 0 ? numbers : arrayOption;
+
+    if (!inputNumbers) {
+      console.error('Error: No array of numbers provided. Use either positional arguments or --array option.');
+      process.exit(1);
+    }
+
+    const joinedNumbers = inputNumbers.join('');
+    stats.handleStats(joinedNumbers, options);
+  });
 
 // File System Commands
 program
